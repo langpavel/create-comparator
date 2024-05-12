@@ -1,0 +1,5 @@
+{
+  "name": "@langpavel/create-comparator",
+  "version": "1.0.0",
+  "exports": "./mod.ts"
+}
