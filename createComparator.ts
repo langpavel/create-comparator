@@ -1,27 +1,11 @@
-/**
- * Represents any comparable value. (operator `<` and `>`)
- */
-export type Comparable = unknown;
-
-/**
- * A selector function that returns a comparable value for a given object.
- */
-export type ComparatorSelector<T> = (
-  ascending_order: T,
-  descending_order: T,
-) => Comparable;
-
-/**
- * A function that can be used by the `Array.prototype.sort` method.
- */
-export type CompareFn<T> = (a: T, b: T) => number;
+import type { ComparatorSelector, CompareFn } from "./types.ts";
 
 /**
  * Creates a comparator function that can be used to sort an array of objects.
  */
-export const createComparator = <T>(
+export function createComparator<T>(
   ...selectors: ComparatorSelector<T>[]
-): CompareFn<T> => {
+): CompareFn<T> {
   return (a: T, b: T) => {
     for (const selector of selectors) {
       const valA = selector(a, b);
@@ -33,4 +17,4 @@ export const createComparator = <T>(
     }
     return 0;
   };
-};
+}
